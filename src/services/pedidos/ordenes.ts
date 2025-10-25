@@ -24,6 +24,7 @@ export async function listOrdenes() {
 }
 
 export async function getOrden(id: number) {
+  console.log(id)
   const { data } = await api.get<Orden>(`/pedidos/ordenes/${id}/`);
   return data;
 }

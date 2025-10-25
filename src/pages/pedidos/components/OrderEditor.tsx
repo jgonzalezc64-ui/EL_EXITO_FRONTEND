@@ -87,6 +87,9 @@ export default function OrderEditor({
   const [desc, setDesc] = useState<number>(orden.descuento ?? 0);
   const [estSel, setEstSel] = useState<number>(orden.id_estado);
 
+   const [tablaDetalle, setTablaDetalle] = useState<OrdenDetalle[]>([]);
+
+
   /* ---------------- Reglas para habilitar acciones (orden) ---------------- */
   const estadoActual = useMemo(
     () => estados.find((e) => e.id_estado === orden.id_estado)?.nombre?.toUpperCase() ?? "",
@@ -117,6 +120,7 @@ export default function OrderEditor({
   useEffect(() => {
     setDesc(orden.descuento ?? 0);
     setEstSel(orden.id_estado);
+    cargarDetalle(orden.id_orden)
   }, [orden.id_orden, orden.descuento, orden.id_estado]);
 
   /* ------------------------------ Mapas ------------------------------ */
@@ -131,6 +135,17 @@ export default function OrderEditor({
     extras.forEach((x) => m.set(x.id_modificador, x));
     return m;
   }, [extras]);
+
+  const cargarDetalle = async (idOrden:number) => {
+    try {
+        const ds = await listDetalles(idOrden);
+        setTablaDetalle(ds);
+      } finally {
+        console.log();
+        
+      }
+  }
+  
 
   /* --------------- Autofill de precios al seleccionar item --------------- */
   function onSelectProducto(e: React.ChangeEvent<HTMLSelectElement>) {
@@ -265,8 +280,12 @@ export default function OrderEditor({
 
     setFd({ cantidad: 1 });
     setExtrasSel([]);
+     cargarDetalle(orden.id_orden)
     await onRefresh();
   }
+
+
+
 
   async function onEditDetalleHandler(d: OrdenDetalle, patch: Partial<OrdenDetalle>) {
     if (!canModify) return;
@@ -294,6 +313,8 @@ export default function OrderEditor({
     await eliminarDetalle(orden.id_orden, d.id_detalle);
     await onRefresh();
   }
+
+
 
   /* --------------------------------- UI --------------------------------- */
   const next = getNextAction(estadoActual); // jose
@@ -513,6 +534,7 @@ export default function OrderEditor({
         canEdit={canModify}
         onEdit={onEditDetalleHandler}
         onDelete={onDeleteDetalleHandler}
+        produtosDetalle={tablaDetalle}
         prodName={(idProd: number) => prodMap.get(idProd)?.nombre ?? `#${idProd}`}
       />
     </div>
@@ -528,15 +550,17 @@ function OrderDetailsTable({
   canEdit,
   onEdit,
   onDelete,
+  produtosDetalle,
   prodName,
 }: {
   idOrden: number;
   canEdit: boolean;
   onEdit: (d: OrdenDetalle, patch: Partial<OrdenDetalle>) => Promise<void>;
   onDelete: (d: OrdenDetalle) => Promise<void>;
+  produtosDetalle:   OrdenDetalle[];
   prodName: (idProd: number) => string;
 }) {
-  const [rows, setRows] = useState<OrdenDetalle[]>([]);
+  //const [rows, setRows] = useState<OrdenDetalle[]>([]);
   const [loading, setLoading] = useState(true);
   const [edit, setEdit] = useState<Record<number, Patch>>({});
 
@@ -544,8 +568,8 @@ function OrderDetailsTable({
     (async () => {
       setLoading(true);
       try {
-        const ds = await listDetalles(idOrden);
-        setRows(ds);
+       // const ds = await listDetalles(idOrden);
+        //setRows(ds);
         setEdit({});
       } finally {
         setLoading(false);
@@ -565,8 +589,8 @@ function OrderDetailsTable({
     const patch: Patch = edit[d.id_detalle] ?? {};
     if (Object.keys(patch).length === 0) return;
     await onEdit(d, patch);
-    const ds = await listDetalles(idOrden);
-    setRows(ds);
+    //const ds = await listDetalles(idOrden);
+   // setRows(ds);
     setEdit((prev) => {
       const n = { ...prev };
       delete n[d.id_detalle];
@@ -591,7 +615,7 @@ function OrderDetailsTable({
             </tr>
           </thead>
           <tbody>
-            {rows.map((d) => {
+            {produtosDetalle.map((d) => {
               const e = edit[d.id_detalle] ?? {};
               return (
                 <tr key={d.id_detalle}>
@@ -648,8 +672,8 @@ function OrderDetailsTable({
                           onClick={async () => {
                             if (!confirm(`¿Eliminar detalle #${d.id_detalle}?`)) return;
                             await onDelete(d);
-                            const ds = await listDetalles(idOrden);
-                            setRows(ds);
+                           // const ds = await listDetalles(idOrden);
+                            //setRows(ds);
                           }}
                         >
                           Eliminar
@@ -667,7 +691,7 @@ function OrderDetailsTable({
                 </td>
               </tr>
             )}
-            {!loading && rows.length === 0 && (
+            {!loading && produtosDetalle.length === 0 && (
               <tr>
                 <td colSpan={6}>
                   <div className="subtle">No hay detalles</div>
