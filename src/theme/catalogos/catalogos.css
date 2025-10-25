@@ -1,0 +1,73 @@
+.cat-toolbar{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.cat-table{
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  overflow: hidden;
+}
+
+.cat-table thead th{
+  text-align: left;
+  padding: 10px 12px;
+  background: #fff3c8; /* amarillo suave */
+  border-bottom: 1px solid var(--border);
+  font-weight: 700;
+}
+
+.cat-table tbody td{
+  padding: 10px 12px;
+  border-bottom: 1px solid var(--border);
+}
+
+.cat-badge{
+  display:inline-block;
+  padding: 2px 8px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 700;
+  color: #fff;
+}
+.cat-badge.ok{ background: #16a34a; } /* verde */
+.cat-badge.off{ background: #9ca3af; } /* gris */
+
+.cat-form{
+  display: grid;
+  gap: 10px;
+  grid-template-columns: 1fr;
+  max-width: 520px;
+}
+
+.cat-actions{
+  display:flex;
+  gap:8px;
+}
+
+.cat-input{
+  background: #fff;      /* forzamos blanco */
+  color: var(--brand-black);
+  height: 36px;
+  border: 1px solid var(--input-border);
+  border-radius: 10px;
+  padding: 8px 12px;
+  width: 100%;
+}
+
+.cat-textarea{
+  background: #fff;
+  color: var(--brand-black);
+  min-height: 72px;
+  border: 1px solid var(--input-border);
+  border-radius: 10px;
+  padding: 8px 12px;
+  width: 100%;
+  resize: vertical;
+}

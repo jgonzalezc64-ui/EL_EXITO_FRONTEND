@@ -1,0 +1,39 @@
+:root{
+  /* Colores institucionales (aprox. desde tu imagen) */
+  --brand-yellow: #F4C542;
+  --brand-yellow-dark: #d6aa2f;
+  --brand-red: #E11E26;
+  --brand-red-dark: #B5121B;
+  --brand-black: #2B2B2B;
+  --brand-white: #FFFFFF;
+
+  /* Derivados */
+  --bg: #fff8e6;                 /* fondo suave amarillento */
+  --text: var(--brand-black);
+  --muted: #6b7280;              /* gris texto secundario */
+  --card-bg: #ffffff;            /* tarjetas */
+  --border: #e5e7eb;
+
+  /* Componentes */
+  --btn-primary-bg: var(--brand-red);
+  --btn-primary-bg-hover: var(--brand-red-dark);
+  --btn-primary-text: #fff;
+
+  --btn-ghost-text: var(--brand-black);
+  --btn-ghost-hover: #efefef;
+
+  --input-bg: #ffffff;
+  --input-border: #d1d5db;
+  --input-border-focus: var(--brand-yellow);
+
+  --sidebar-bg: #fff5cf;         /* amarillo claro */
+  --topbar-bg: var(--brand-yellow);
+}
+
+html, body, #root{ height: 100%; }
+body{
+  margin:0;
+  color:var(--text);
+  background:var(--bg);
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+}

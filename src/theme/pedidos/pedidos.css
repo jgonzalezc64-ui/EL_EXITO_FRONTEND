@@ -1,0 +1,163 @@
+/* ===== Pedidos (Kits UI) ===== */
+
+/* Layout principal (lado izq: abrir/lista, lado der: editor) */
+.ped-grid{
+  display:grid; gap:16px;
+  grid-template-columns: 360px 1fr; /* lista ordenes / editor */
+}
+
+/* Tarjeta base */
+.ped-card{
+  background: var(--card-bg, #fffef7);
+  border: 1px solid var(--border, #e9e3d0);
+  border-radius: 14px;
+  padding: 12px;
+  box-shadow: 0 8px 24px rgba(0,0,0,.04);
+}
+
+/* Barra superior opcional (no siempre usada) */
+.ped-toolbar{
+  display:flex; align-items:center; justify-content:space-between; gap:12px; margin-bottom:12px;
+}
+
+/* Lista de órdenes */
+.ped-list{
+  display: grid; gap: 8px;
+  max-height: calc(100vh - 220px);
+  overflow: auto;
+  padding-right: 2px; /* anti-jump por scrollbar */
+}
+
+.ped-item{
+  border: 1px solid var(--border, #eee3c8);
+  border-radius: 10px;
+  padding: 10px;
+  background: #fff;
+  display:flex; align-items:center; justify-content:space-between; gap:8px;
+  cursor: pointer;
+  transition: transform .06s ease, box-shadow .12s ease, border-color .12s ease;
+}
+.ped-item:hover{ transform: translateY(-1px); box-shadow: 0 6px 18px rgba(0,0,0,.06); }
+.ped-item.active{ outline: 2px solid var(--brand-red); }
+
+/* Filas compactas */
+.ped-row{ display:flex; align-items:center; gap:8px; flex-wrap: wrap; }
+.ped-kv{ font-size:12px; color:var(--muted, #7a6a4f); }
+.ped-total{ font-weight:900; }
+
+/* Formularios */
+.ped-form-grid{
+  display:grid; gap:10px; grid-template-columns: 1fr 1fr;
+}
+
+.ped-input,
+.ped-select,
+.ped-num{
+  background:#fff; color:var(--brand-black, #201a13);
+  border:1px solid var(--input-border, #e3dcc7);
+  border-radius:10px; padding:8px 10px; height:36px; width:100%;
+  outline: none;
+}
+.ped-input:focus,
+.ped-select:focus,
+.ped-num:focus{
+  border-color: var(--brand-red, #d91e18);
+  box-shadow: 0 0 0 3px rgba(217,30,24,.12);
+}
+
+.ped-textarea{
+  background:#fff; color:var(--brand-black, #201a13);
+  border:1px solid var(--input-border, #e3dcc7);
+  border-radius:10px; padding:8px 10px; width:100%; min-height:70px; resize:vertical;
+  outline: none;
+}
+.ped-textarea:focus{
+  border-color: var(--brand-red, #d91e18);
+  box-shadow: 0 0 0 3px rgba(217,30,24,.12);
+}
+
+.ped-actions{ display:flex; gap:8px; align-items:center; flex-wrap: wrap; }
+
+/* —— Tabla de detalles (reusa estilos de cat-table si existen) —— */
+table.ped-details{
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  background: #fff;
+  border: 1px solid var(--border, #eadfc5);
+  border-radius: 12px;
+  overflow: hidden;
+}
+.ped-details th, .ped-details td{
+  padding: 10px 12px;
+  border-bottom: 1px solid var(--border, #f0e7d2);
+  vertical-align: middle;
+}
+.ped-details thead th{
+  background: #fff8e3;
+  font-weight: 800;
+  color: var(--brand-black, #2b2116);
+}
+.ped-details tbody tr:last-child td{
+  border-bottom: none;
+}
+.ped-details .ped-actions-cell{
+  display:flex; gap:8px; align-items:center; justify-content:flex-end;
+}
+
+/* Inputs compactos dentro de tabla */
+.ped-details .ped-num{
+  height: 34px;
+}
+.ped-details .ped-input{
+  height: 34px;
+}
+
+/* Badges rápidos (por si los necesitas) */
+.ped-badge{
+  display:inline-block;
+  font-size: 12px;
+  font-weight: 800;
+  padding: 3px 8px;
+  border-radius: 999px;
+  background: #fff0cc;
+  color: #7b4e00;
+  border: 1px solid #ffe3a1;
+}
+
+/* Loader sutil */
+.ped-skeleton{
+  height: 10px;
+  border-radius: 6px;
+  background: linear-gradient(90deg, #f2ecde, #f8f3e6, #f2ecde);
+  background-size: 200% 100%;
+  animation: ped-shimmer 1.4s ease infinite;
+}
+@keyframes ped-shimmer{
+  0%{ background-position: 200% 0; }
+  100%{ background-position: 0 0; }
+}
+
+/* Responsivo */
+@media (max-width: 1024px){
+  .ped-grid{ grid-template-columns: 1fr; }
+  .ped-list{ max-height: none; }
+}
+
+@media (max-width: 640px){
+  .ped-form-grid{ grid-template-columns: 1fr; }
+  .ped-actions{ justify-content: flex-end; }
+  .ped-details th:nth-child(1),
+  .ped-details td:nth-child(1){
+    width: 64px;
+  }
+}
+
+/* Pequeñas utilidades para consistencia con el tema */
+.h1{ font-size: 28px; line-height: 1.15; margin: 0 0 10px; }
+.subtle{ color: var(--muted, #7a6a4f); }
+.btn{ cursor:pointer; border: none; border-radius: 10px; padding: 8px 12px; font-weight: 800; }
+.btn-primary{ background: var(--brand-red, #d91e18); color: var(--brand-white, #fff); }
+.btn-primary:hover{ filter: brightness(.95); }
+.btn-ghost{ background: transparent; color: var(--brand-black, #2b2116); }
+.btn-ghost:hover{ background: rgba(0,0,0,.04); }

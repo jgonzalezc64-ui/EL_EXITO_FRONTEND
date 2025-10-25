@@ -1,0 +1,161 @@
+/* ===== Pagos – módulo de pago (reusa palette.css y components.css) ===== */
+
+/* Layout principal: detalle (izq) / panel de pago (der) */
+.pay-grid{
+  display: grid;
+  gap: 16px;
+  grid-template-columns: 1fr 380px;
+}
+@media (max-width: 1024px){
+  .pay-grid{ grid-template-columns: 1fr; }
+}
+
+/* Tarjetas consistentes con .ui-card */
+.pay-card{
+  background: var(--card-bg, #fffef7);
+  border: 1px solid var(--border, #e9e3d0);
+  border-radius: 14px;
+  padding: 16px;
+  box-shadow: 0 8px 24px rgba(0,0,0,.04);
+}
+
+/* Encabezado */
+.pay-head{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+  margin-bottom:10px;
+}
+.pay-title{
+  font-size: 18px;
+  font-weight: 800;
+  color: var(--brand-black, #201a13);
+}
+.pay-subtle{ color: var(--muted, #7a6a4f); font-size: 13px; }
+
+/* Tabla de ítems (reusa estilos tipo .prod-table) */
+.pay-table-wrap{ overflow:auto; border-radius:12px; border:1px solid var(--border); }
+.pay-table{
+  width:100%;
+  border-collapse: collapse;
+  min-width: 520px;
+  background: #fff;
+}
+.pay-table th, .pay-table td{
+  padding: 10px 12px;
+  border-bottom: 1px solid var(--border, #e9e3d0);
+  text-align: left;
+  font-size: 14px;
+}
+.pay-table thead th{
+  background: var(--table-head, #fff8e3);
+  position: sticky; top: 0; z-index: 2;
+  font-weight: 700;
+}
+.pay-table tfoot td{
+  font-weight: 800;
+  font-size: 16px;
+}
+.pay-col-qty{ width: 72px; text-align:center; }
+.pay-col-price{ width: 110px; text-align:right; }
+.pay-col-total{ width: 120px; text-align:right; }
+
+/* Resumen (derecha) */
+.pay-panel{
+  display: grid;
+  gap: 12px;
+}
+.pay-summary{
+  display:grid;
+  gap:10px;
+}
+.pay-row{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+}
+.pay-row .label{ color: var(--muted); }
+.pay-row .value{ font-weight: 800; }
+
+.pay-total{
+  font-size: 22px;
+  font-weight: 900;
+  color: var(--brand-black);
+  display:flex; align-items:center; justify-content:space-between;
+}
+.pay-total .value{ font-size: 24px; }
+
+/* Métodos de pago */
+.pay-methods{
+  display:grid;
+  grid-template-columns: 1fr 1fr;
+  gap:10px;
+}
+@media (max-width: 480px){ .pay-methods{ grid-template-columns: 1fr; } }
+
+.pay-method{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
+  padding:12px;
+  border:1px solid var(--border);
+  border-radius:12px;
+  background:#fff;
+  cursor:pointer;
+  font-weight:700;
+  text-align:center;
+}
+.pay-method:hover{ box-shadow: 0 0 0 3px rgba(244,197,66,0.25); }
+.pay-method.active{
+  border-color: var(--brand-yellow, #f4c542);
+  background: #fffdf5;
+}
+
+/* Entrada y keypad opcional para montos */
+.pay-input{
+  width:100%;
+  border:1px solid var(--input-border, #e3dcc7);
+  border-radius:10px;
+  padding:10px 12px;
+  font-size:16px;
+  outline: none;
+  background: #fff;
+}
+.pay-input:focus{ box-shadow:0 0 0 3px rgba(32,26,19,0.08); }
+
+.pay-keypad{
+  display:grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap:10px;
+}
+.pay-key{
+  padding:12px 0;
+  border:1px solid var(--border);
+  border-radius:12px;
+  background:#fff;
+  text-align:center;
+  font-weight:800;
+  cursor:pointer;
+  user-select:none;
+}
+.pay-key:active{ transform: scale(.98); }
+
+/* Botones finales (pagar, cancelar) – reusa .btn y variantes */
+.pay-actions{
+  display:flex;
+  gap:10px;
+  justify-content:flex-end;
+}
+
+/* Avisos */
+.pay-alert{
+  background: #fff8e3;
+  border: 1px solid #f1e4b0;
+  color: #7a6a4f;
+  border-radius: 10px;
+  padding: 10px 12px;
+  font-size: 14px;
+}

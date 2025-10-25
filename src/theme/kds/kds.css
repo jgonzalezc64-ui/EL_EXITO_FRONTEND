@@ -1,0 +1,152 @@
+/* ===== KDS (Kitchen Display) ===== */
+
+/* Reusa la misma paleta y criterios visuales que Pedidos */
+:root{
+  --kds-card-bg: var(--card-bg, #fffef7);
+  --kds-border:   var(--border, #e9e3d0);
+  --kds-input:    var(--input-border, #e3dcc7);
+  --kds-text:     var(--brand-black, #201a13);
+  --kds-muted:    var(--muted, #7a6a4f);
+  --kds-red:      var(--brand-red, #d91e18);
+  --kds-white:    var(--brand-white, #fff);
+  --kds-head:     #fff8e3; /* igual a pedidos */
+  --kds-shadow:   0 8px 24px rgba(0,0,0,.04);
+}
+
+/* Contenedor principal de la página */
+.kds{
+  color: var(--kds-text);
+}
+
+/* Título igual a las demás pantallas */
+.kds .h1{
+  font-size: 28px;
+  line-height: 1.15;
+  margin: 0 0 10px;
+  font-weight: 800;
+}
+
+/* Lista de órdenes (varias tarjetas apiladas) */
+.kds-list{
+  display: grid;
+  gap: 14px;
+}
+
+/* Tarjeta de orden (mismos bordes/sombra de Pedidos) */
+.kds-card{
+  background: var(--kds-card-bg);
+  border: 1px solid var(--kds-border);
+  border-radius: 14px;
+  box-shadow: var(--kds-shadow);
+  overflow: hidden;
+}
+
+/* Header de la tarjeta: número, estado, totales y botón */
+.kds-header{
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  padding: 12px;
+  border-bottom: 1px solid var(--kds-border);
+}
+
+.kds-title{
+  display: flex;
+  flex-direction: column;
+}
+.kds-estado{
+  font-size: 12px;
+  color: var(--kds-muted);
+}
+
+/* Totales (derecha), igual a Pedidos */
+.kds-totales{
+  margin-left: auto;
+  text-align: right;
+}
+.kds-total{
+  font-weight: 900;
+}
+.kds-sub{
+  font-size: 12px;
+  color: var(--kds-muted);
+}
+
+/* Botón primario (mismo estilo que .btn-primary de Pedidos) */
+.kds .btn{
+  cursor: pointer;
+  border: none;
+  border-radius: 10px;
+  padding: 8px 12px;
+  font-weight: 800;
+}
+.kds .btn-primary{
+  background: var(--kds-red);
+  color: var(--kds-white);
+}
+.kds .btn-primary:hover{
+  filter: brightness(.95);
+}
+
+/* Meta: Servicio, Mesa, Observaciones (bajo el header) */
+.kds-meta{
+  padding: 10px 12px 0;
+  display: grid;
+  gap: 6px;
+  color: var(--kds-text);
+}
+.kds-meta .muted{
+  color: var(--kds-muted);
+  font-style: italic;
+}
+
+/* Tabla de detalles – copia de la de Pedidos con prefijo kds- */
+table.kds-details{
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  background: #fff;
+  border: 1px solid var(--kds-border);
+  border-radius: 12px;
+  overflow: hidden;
+  margin: 12px;            /* respirito interior como en editor de pedidos */
+  margin-top: 10px;
+}
+.kds-details th,
+.kds-details td{
+  padding: 10px 12px;
+  border-bottom: 1px solid var(--kds-border);
+  vertical-align: middle;
+}
+.kds-details thead th{
+  background: var(--kds-head);
+  font-weight: 800;
+  color: var(--kds-text);
+}
+.kds-details tbody tr:last-child td{
+  border-bottom: none;
+}
+.kds-details .kds-actions-cell{
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+/* Estados vacíos / loaders */
+.kds-empty{
+  color: var(--kds-muted);
+  padding: 12px;
+}
+
+/* Utilidades heredadas para coherencia con Pedidos */
+.kds .subtle{ color: var(--kds-muted); }
+
+/* Responsivo */
+@media (max-width: 640px){
+  .kds-header{ padding: 10px; }
+  table.kds-details{ margin: 10px; }
+  .kds-details th:nth-child(1),
+  .kds-details td:nth-child(1){ width: 64px; }
+}

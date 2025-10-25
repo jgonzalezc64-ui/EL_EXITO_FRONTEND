@@ -1,0 +1,54 @@
+/* Menús – estilos específicos (reusa variables de palette.css) */
+
+/* Ajustes suaves para esta pantalla */
+.menus-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+/* Reutilizamos utilidades globales:
+   .ui-card, .prod-input, .prod-select, .btn, .btn-ghost,
+   .btn-primary, .prod-form, .prod-table, .pill, .pill.ok
+   ya deberían venir de tus CSS previos (palette.css / productos.css). */
+
+/* Por si la tabla necesita scroll horizontal en pantallas pequeñas */
+.prod-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.prod-table th,
+.prod-table td {
+  padding: 8px 10px;
+  border-bottom: 1px solid var(--border);
+  text-align: left;
+  vertical-align: middle;
+}
+
+.prod-table thead th {
+  background: var(--table-head, #fafafa);
+  font-weight: 700;
+}
+
+/* Input/select en filtros */
+.prod-input,
+.prod-select {
+  min-width: 220px;
+}
+
+/* Pastillas de estado */
+.pill {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 999px;
+  font-size: 12px;
+  border: 1px solid var(--border);
+  background: #fff;
+}
+
+.pill.ok {
+  background: var(--pill-ok-bg, #e8f8e8);
+  border-color: var(--pill-ok-border, #cfe9cf);
+}
