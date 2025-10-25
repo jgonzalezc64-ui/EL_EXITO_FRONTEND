@@ -4,3 +4,6 @@ export type Me = {
   groups: string[];      // <-- importante
   is_superuser: boolean; // <-- importante
 };
+
+
+export type LoginResponse = { access: string; refresh: string };
